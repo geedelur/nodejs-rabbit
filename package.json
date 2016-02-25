@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-rabbit",
+  "name": "geedelur-rabbit",
   "version": "1.0.0",
   "description": "An only-for-myself dead simple RabbitMQ client",
   "main": "dist/rabbit.js",
