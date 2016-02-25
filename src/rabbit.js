@@ -13,7 +13,7 @@ export default (options) => {
   const open = amqp.connect(`amqp://${options.user}:${options.pass}@${options.host}`);
 
   return {
-    onMessage: (queue) => new Promise((resolve, reject) => {
+    onMessage: (queue, callback) => {
       open
         .then(conn => {
           conn.createChannel()
@@ -21,13 +21,13 @@ export default (options) => {
               ch.assertQueue(queue);
               ch.consume(queue, msg => {
                 ch.ack(msg);
-                resolve(JSON.parse(msg.content.toString()));
+                callback(false, JSON.parse(msg.content.toString()));
               });
             })
-            .catch(err => reject(Error(`Rabbit:Error ${err}`)));
+            .catch(err => callback(Error(`Rabbit:Error ${err}`), null));
         })
-        .catch(err => reject(Error(`Rabbit:Error ${err}`)));
-    }),
+        .catch(err => callback(Error(`Rabbit:Error ${err}`), null));
+    },
 
     writeMessage: (queue, msg) => new Promise((resolve, reject) => {
       open
