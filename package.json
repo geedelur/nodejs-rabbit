@@ -2,7 +2,7 @@
   "name": "nodejs-rabbit",
   "version": "1.0.0",
   "description": "An only-for-myself dead simple RabbitMQ client",
-  "main": "index.js",
+  "main": "dist/rabbit.js",
   "dependencies": {
     "amqplib": "^0.4.1"
   },
