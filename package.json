@@ -4,12 +4,12 @@
   "description": "An only-for-myself dead simple RabbitMQ client",
   "main": "index.js",
   "dependencies": {
-    "amqplib": "^0.4.1",
-    "babel-preset-es2015": "^6.5.0",
-    "babel-register": "^6.5.2"
+    "amqplib": "^0.4.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.5.1",
     "babel-eslint": "^5.0.0",
+    "babel-preset-es2015": "^6.5.0",
     "eslint": "^2.2.0",
     "eslint-config-airbnb": "^6.0.2",
     "eslint-plugin-react": "^4.1.0"

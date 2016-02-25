@@ -1,7 +1,16 @@
-import amqp from 'amqplib';
+const amqp = require('amqplib');
 
-export default ({ host, user, pass }) => {
-  const open = amqp.connect(`amqp://${user}:${pass}@${host}`);
+export default (options) => {
+  if (
+    options === undefined
+    || options.host === undefined
+    || options.user === undefined
+    || options.pass === undefined
+  ) {
+    throw new Error('Rabbit:Error You must define <host>, <user> and <pass> in your options');
+  }
+
+  const open = amqp.connect(`amqp://${options.user}:${options.pass}@${options.host}`);
 
   return {
     onMessage: (queue, callback) => new Promise((resolve, reject) => {
