@@ -13,14 +13,14 @@ exports.default = function (options) {
   var open = amqp.connect('amqp://' + options.user + ':' + options.pass + '@' + options.host);
 
   return {
-    onMessage: function onMessage(queue, callback) {
+    onMessage: function onMessage(queue) {
       return new Promise(function (resolve, reject) {
         open.then(function (conn) {
           conn.createChannel().then(function (ch) {
             ch.assertQueue(queue);
             ch.consume(queue, function (msg) {
               ch.ack(msg);
-              callback(JSON.parse(msg.content.toString()));
+              resolve(JSON.parse(msg.content.toString()));
             });
           }).catch(function (err) {
             return reject(Error('Rabbit:Error ' + err));
